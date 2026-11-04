@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMarket — Техника Apple</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, 'SF Pro Display', 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* СВЕТЛЫЙ ПРЕМИАЛЬНЫЙ ФОН */
+    body {
+      background: #f2f2f7;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(0, 168, 225, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 100% 60%, rgba(37, 211, 102, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 0% 90%, rgba(255, 204, 0, 0.1) 0%, transparent 50%);
+      background-attachment: fixed;
+      color: #1c1c1e;
+      display: flex;
+      justify-content: center;
+      padding: 20px 12px 48px;
+      line-height: 1.4;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Шапка */
+    .header {
+      text-align: center;
+      padding: 16px 0 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-logo {
+      width: 68px;
+      height: 68px;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .header-logo svg {
+      width: 34px;
+      height: 34px;
+      fill: #1c1c1e;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      color: #1c1c1e;
+    }
+
+    .header p {
+      font-size: 13px;
+      color: #636366;
+      font-weight: 500;
+    }
+
+    /* Кнопка WhatsApp Астана */
+    .btn-main-wa {
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 18px;
+      border-radius: 20px;
+      text-align: center;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+      transition: transform 0.2s;
+    }
+    .btn-main-wa:active { transform: scale(0.98); }
+
+    /* Светлые карточки */
+    .card-link {
+      position: relative;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 22px;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: #1c1c1e;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
+    }
+    .card-link:active {
+      transform: scale(0.98);
+      background: #f8f8fc;
+    }
+
+    .card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #1c1c1e;
+    }
+
+    .card-sub {
+      font-size: 12px;
+      color: #8e8e93;
+    }
+
+    .arrow-icon {
+      width: 20px;
+      height: 20px;
+      fill: #8e8e93;
+    }
+
+    /* Флагманская карточка 2ГИС Астана */
+    .card-astana {
+      background: linear-gradient(135deg, #e6f7ff 0%, #ffffff 100%);
+      border: 1.5px solid #00a8e1;
+      box-shadow: 0 8px 24px rgba(0, 168, 225, 0.15);
+    }
+
+    .badge-astana {
+      background: #00a8e1;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Баннер Trade-In */
+    .banner-tradein {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1.5px solid #ffcc00;
+      background: #1c1c1e;
+      min-height: 175px;
+      display: flex;
+      align-items: flex-end;
+      text-decoration: none;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+      transition: transform 0.2s;
+    }
+    .banner-tradein:active { transform: scale(0.98); }
+
+    .banner-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.75;
+    }
+
+    .banner-overlay {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.88) 75%);
+      width: 100%;
+    }
+
+    .banner-tag {
+      color: #ffcc00;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 4px;
+    }
+
+    .banner-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .banner-desc {
+      font-size: 12px;
+      color: #e5e5ea;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #636366;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 10px 0 -4px 6px;
+    }
+
+    /* Карточки филиалов */
+    .city-card {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+    }
+
+    .city-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1c1c1e;
+    }
+
+    .city-address {
+      font-size: 11px;
+      color: #8e8e93;
+      font-weight: 400;
+    }
+
+    .city-actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .btn-chip {
+      background: #f2f2f7;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      color: #1c1c1e;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 12px 6px;
+      border-radius: 14px;
+      text-decoration: none;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-chip:active {
+      background: #e5e5ea;
+    }
+    .btn-chip-2gis {
+      background: #e6f7ff;
+      border-color: rgba(0, 168, 225, 0.3);
+      color: #0077a3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 1. ШАПКА -->
+  <div class="header">
+    <div class="header-logo">
+      <svg viewBox="0 0 170 170">
+        <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.32-2.73-7.23-7.4-11.73-14.01-6.19-9.1-11.05-19.33-14.58-30.68-3.53-11.36-5.3-22.51-5.3-33.47 0-14.04 3.53-25.75 10.59-35.13 7.06-9.39 16.03-14.19 26.91-14.42 4.47 0 9.5 1.16 15.08 3.49 5.58 2.33 9.4 3.5 11.46 3.5 1.83 0 5.79-1.22 11.89-3.66 6.1-2.44 11.19-3.5 15.27-3.18 12.03.96 21.6 5.62 28.71 13.98-10.74 6.51-16.01 15.51-15.82 27.01.19 9.07 3.53 16.7 10.02 22.88 6.49 6.18 14.32 9.69 23.49 10.53-2.58 7.74-6.12 15.54-10.63 23.4zM119.22 31.84c0-7.14 2.63-13.97 7.9-20.49 5.27-6.52 11.88-10.47 19.82-11.85.19.96.29 1.83.29 2.61 0 7.02-2.72 13.94-8.15 20.76-5.43 6.82-12.11 10.72-20.04 11.7-.09-.87-.13-1.77-.13-2.73z"/>
+      </svg>
+    </div>
+    <h1>IMarket</h1>
+    <p>Оригинальная техника Apple • 10+ лет работы</p>
+  </div>
+
+  <!-- 2. ГЛАВНАЯ КНОПКА (АСТАНА WHATSAPP) -->
+  <a href="https://wa.me/77087030101?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B2%D0%BE%D0%B4%D1%83%20iPhone%20%D0%B2%20%D0%90%D1%81%D1%82%D0%B0%D0%BD%D0%B5" class="btn-main-wa" target="_blank">
+    <span>💬</span> Написать в WhatsApp (Астана)
+  </a>
+
+  <!-- 3. ОСНОВНЫЕ РАЗДЕЛЫ -->
+  <div class="section-label">Каталог и адрес</div>
+
+  <!-- Прайс -->
+  <a href="#" class="card-link">
+    <div class="card-info">
+      <div class="card-title">📱 Прайс | Новые устройства</div>
+      <div class="card-sub">iPhone (eSIM / Nano-SIM) — цены в наличии</div>
+    </div>
+    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+  </a>
+
+  <!-- Витрина -->
+  <a href="#" class="card-link">
+    <div class="card-info">
+      <div class="card-title">🌐 Сайт-витрина</div>
+      <div class="card-sub">Новые и б/у устройства Apple с ценами</div>
+    </div>
+    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+  </a>
+
+  <!-- КАРТОЧКА №3: 2ГИС АСТАНА -->
+  <a href="https://go.2gis.com/LWVOI" class="card-link card-astana" target="_blank">
+    <div class="card-info">
+      <div class="card-title">📍 2ГИС Астана <span class="badge-astana">Флагман</span></div>
+      <div class="card-sub">ул. Бухар Жырау, 26 • Открыть маршрут</div>
+    </div>
+    <svg class="arrow-icon" style="fill: #00a8e1;" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+  </a>
+
+  <!-- 4. БАННЕР TRADE-IN -->
+  <a href="https://wa.me/77087030101?text=%D0%A5%D0%BE%D1%87%D1%83%20%D1%80%D0%B0%D1%81%D1%81%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C%20Trade-In%20%D0%B2%20%D0%90%D1%81%D1%82%D0%B0%D0%BD%D0%B5" class="banner-tradein" target="_blank">
+    <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=800&auto=format&fit=crop" class="banner-img" alt="Trade-In iPhone">
+    <div class="banner-overlay">
+      <div class="banner-tag">Программа обмена</div>
+      <div class="banner-title">Trade-In | Обмен старого на новый</div>
+      <div class="banner-desc">Мгновенная оценка за 5 минут. Сдай свой iPhone — получи новый.</div>
+    </div>
+  </a>
+
+  <!-- 5. ДРУГИЕ ФИЛИАЛЫ -->
+  <div class="section-label">Другие филиалы</div>
+
+  <!-- Уральск -->
+  <div class="city-card">
+    <div class="city-header">
+      <span>📍 Уральск</span>
+      <span class="city-address">пр. Абая, 88</span>
+    </div>
+    <div class="city-actions">
+      <a href="https://wa.me/77718459000?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B2%D0%BE%D0%B4%D1%83%20iPhone%20%D0%B2%20%D0%A3%D1%80%D0%B0%D0%BB%D1%8C%D1%81%D0%BA%D0%B5" class="btn-chip" target="_blank">🟢 WhatsApp</a>
+      <a href="https://go.2gis.com/Wop2C" class="btn-chip btn-chip-2gis" target="_blank">🗺️ 2ГИС Карты</a>
+    </div>
+  </div>
+
+  <!-- Атырау -->
+  <div class="city-card">
+    <div class="city-header">
+      <span>📍 Атырау</span>
+      <span class="city-address">ул. Бактыгерея Кулманова, 105а</span>
+    </div>
+    <div class="city-actions">
+      <a href="https://wa.me/77028560000?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B2%D0%BE%D0%B4%D1%83%20iPhone%20%D0%B2%20%D0%90%D1%82%D1%8B%D1%80%D0%B0%D1%83" class="btn-chip" target="_blank">🟢 WhatsApp</a>
+      <a href="https://go.2gis.com/uS6sB" class="btn-chip btn-chip-2gis" target="_blank">🗺️ 2ГИС Карты</a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
